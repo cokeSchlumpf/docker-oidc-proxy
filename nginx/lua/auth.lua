@@ -1,5 +1,5 @@
 local opts = {
-    redirect_uri_path = os.getenv("OID_REDIRECT_PATH") or "/redirect_uri",
+    redirect_uri = os.getenv("OID_REDIRECT_URI"),
     discovery = os.getenv("OID_DISCOVERY"),
     client_id = os.getenv("OID_CLIENT_ID"),
     client_secret = os.getenv("OID_CLIENT_SECRET"),
@@ -35,3 +35,4 @@ end
 
 ngx.log(ngx.INFO, "Authentication successful, setting Auth header...")
 ngx.req.set_header("Authorization", "Bearer "..session.data.enc_id_token)
+ngx.req.set_header("X-User", res.id_token.email)
